@@ -4,42 +4,22 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
-  Atom,
+  ArrowUpRight,
   BarChart3,
   Bot,
-  BookOpen,
   Braces,
   BriefcaseBusiness,
-  CheckCircle2,
-  ClipboardList,
   Database,
   Download,
-  FileSpreadsheet,
-  FileText,
-  FormInput,
-  GitBranch,
-  Github,
   GraduationCap,
-  Flame,
-  Hash,
-  Image as ImageIcon,
   Languages,
   Linkedin,
-  ListChecks,
   Mail,
   MapPin,
-  MessageCircle,
   Network,
-  PenTool,
   Phone,
-  Send,
-  Server,
   ShieldCheck,
-  Smartphone,
   Sparkles,
-  Table2,
-  Terminal,
-  TestTube,
   Users,
 } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -59,10 +39,7 @@ type ExperienceItem = {
   period: string;
   role: string;
   org: string;
-  badge?: string;
-  text?: string;
-  bullets?: string[];
-  group: "software" | "other";
+  text: string;
 };
 
 type ProjectItem = {
@@ -96,27 +73,23 @@ const content = {
       "My work sits at the intersection of technology, humanitarian programming and evidence. I design data-collection systems, clean and analyze data, build dashboards and reporting workflows, train teams, support field monitoring, and use AI and automation to make processes faster and more reliable.",
     stats: [
       ["5+", "Years across data & MEAL"],
-      ["12+", "Professional roles"],
+      ["8+", "Professional roles"],
       ["20+", "Tools, dashboards & workflows"],
-      ["5", "Core domains"],
-      ["5+", "Software projects delivered"],
+      ["4", "Core domains"],
     ],
     expertise: "Areas of expertise",
     experience: "Professional experience",
     projects: "Selected work",
     tech: "Technology stack",
     education: "Education & training",
-    languages: "Languages",
-    softwareExperience: "Software Experience",
-    otherExperience: "MEAL, Information Management & IT Experience",
     contactTitle: "Let’s build something useful",
     contactText:
       "Open to roles and collaborations across data, information systems, MEAL, reporting, AI-enabled workflows and digital transformation.",
     footer: "Built around data, systems and meaningful impact.",
+    caseStudy: "Case study",
     contactSection: "Contact",
     email: "Email",
     phone: "Phone",
-    whatsapp: "WhatsApp",
     location: "Idlib, Syria",
   },
   ar: {
@@ -142,27 +115,23 @@ const content = {
       "أعمل عند تقاطع التقنية والبرامج الإنسانية والأدلة. أصمم أنظمة جمع البيانات، وأنظف البيانات وأحللها، وأبني لوحات المعلومات ومسارات التقارير، وأدرب الفرق، وأدعم المراقبة الميدانية، وأستخدم الذكاء الاصطناعي والأتمتة لتسريع العمل ورفع موثوقيته.",
     stats: [
       ["+5", "سنوات في البيانات والمراقبة والتقييم"],
-      ["+12", "دور مهني"],
+      ["+8", "أدوار مهنية"],
       ["+20", "أداة ولوحة ومسار عمل"],
-      ["5", "مجالات أساسية"],
-      ["+5", "مشروع برمجي منجز"],
+      ["4", "مجالات أساسية"],
     ],
     expertise: "مجالات الخبرة",
     experience: "الخبرة المهنية",
     projects: "نماذج من الأعمال",
     tech: "التقنيات والأدوات",
     education: "التعليم والتدريب",
-    languages: "اللغات",
-    softwareExperience: "الخبرة البرمجية",
-    otherExperience: "خبرة المراقبة والتقييم وإدارة المعلومات وتقنية المعلومات",
     contactTitle: "لنبنِ شيئاً مفيداً",
     contactText:
       "مهتم بالفرص والتعاون في البيانات، وأنظمة المعلومات، والمراقبة والتقييم، والتقارير، وحلول الذكاء الاصطناعي، والتحول الرقمي.",
     footer: "بيانات أفضل، أنظمة أذكى، وأثر أوضح.",
+    caseStudy: "عرض المشروع",
     contactSection: "تواصل",
     email: "البريد الإلكتروني",
     phone: "الهاتف",
-    whatsapp: "واتساب",
     location: "إدلب، سوريا",
   },
 } as const;
@@ -257,204 +226,78 @@ const expertiseItems: Record<Lang, ExpertiseItem[]> = {
 const experienceItems: Record<Lang, ExperienceItem[]> = {
   en: [
     {
-      period: "Oct 2025 — Present",
-      role: "Software Developer",
-      badge: "Full Stack",
-      org: "Al-Salam Hospital — Remote · Project-based contract",
-      bullets: [
-        "Developed a full hospital web system using React and Django.",
-        "Built a standalone Android pharmacy-management app using Flutter and SQLite (inventory, sales, purchase invoices, cash boxes, team permissions).",
-        "Ran functional tests on purchase/sale logic, inventory balance consistency, cash accuracy and access rights.",
-      ],
-      group: "software",
-    },
-    {
-      period: "Jan 2026 — Present",
-      role: "Web & Mobile Developer",
-      badge: "Part-time",
-      org: "Web Nova — Remote",
-      bullets: [
-        "Developed the frontend of a clinic management system (patient records, appointments, medical files).",
-        "Built a Flutter Android app for stadium booking and scheduling.",
-        "Performed systems analysis and functional testing to verify process accuracy.",
-        "Prepared technical documentation and summaries of the team's previous work.",
-      ],
-      group: "software",
-    },
-    {
-      period: "2022 — Present",
-      role: "Software Developer & Graphic Designer",
-      badge: "Project-based contract",
-      org: "kor kan — Lebanon (Remote)",
-      bullets: [
-        "Developing a sales system and the One Dollars online store since 2024, covering front end, back end, products, orders and shopping-cart management.",
-        "Designing product templates since 2022 using Adobe Illustrator and Adobe Photoshop, and applying the store's visual identity.",
-      ],
-      group: "software",
-    },
-    {
-      period: "2022 — Present",
-      role: "Technical Officer",
-      badge: "Additional responsibilities",
-      org: "ATAA Relief",
-      bullets: [
-        "Technical responsibilities in addition to the primary role within ATAA Relief.",
-        "Developed AtaaMEAL Field to digitize monitoring and evaluation work, including field-visit plans and documentation of notes and evaluation findings.",
-        "Provided technical support to users, devices and software, and maintained laptop hardware and software.",
-        "Maintained office networks, computers and printers, and handled day-to-day technical issues.",
-      ],
-      group: "software",
-    },
-    {
-      period: "Sep 2023 — Present",
+      period: "2023 — Present",
       role: "Monitoring & Evaluation Officer",
       org: "ATAA Relief",
       text: "Lead monitoring workflows, data-collection tools, data quality, analysis, reporting and team guidance.",
-      group: "other",
     },
     {
       period: "Jun — Dec 2024",
       role: "Area Manager — Dana",
-      badge: "Part-time",
       org: "Sawa Organization",
       text: "Managed area operations, field teams, training activities, grant distribution and local coordination.",
-      group: "other",
     },
     {
       period: "May — Sep 2023",
       role: "Assistant Information Management",
       org: "ATAA Relief",
       text: "Reviewed programme data, supported reporting, prepared beneficiary datasets and managed digital archiving.",
-      group: "other",
     },
     {
       period: "Jan 2021 — May 2023",
       role: "Field Monitoring & Evaluation Officer",
       org: "ATAA Relief",
       text: "Conducted field monitoring, assessments, quantitative and qualitative data collection, analysis and verification.",
-      group: "other",
     },
     {
-      period: "Oct 2020 — Jan 2021",
-      role: "Data Entry Officer",
+      period: "2022 — Present",
+      role: "IT Officer — Volunteer",
       org: "ATAA Relief",
-      text: "Entered and updated beneficiary data, reviewed information before sharing with relevant officers, and organized and archived project documents.",
-      group: "other",
+      text: "Provide technical support, maintain office networks, troubleshoot devices and support daily IT operations.",
     },
     {
-      period: "Sep — Oct 2020",
-      role: "Data Collector",
-      org: "Relief International",
-      text: "Contributed to needs assessments in IDP camps, conducted field visits, collected beneficiary data and reviewed forms before submission.",
-      group: "other",
-    },
-    {
-      period: "Jan 2021 — Present",
+      period: "2021 — Present",
       role: "Trainer",
       org: "Syrian Platform",
       text: "Deliver training in Excel, KoboToolbox, Power BI, data protection, archiving and basic cybersecurity.",
-      group: "other",
     },
   ],
   ar: [
-    {
-      period: "تشرين الأول 2025 — حتى الآن",
-      role: "مطوّر برمجيات",
-      badge: "Full Stack",
-      org: "مشفى السلام — عن بُعد · تعاقد على مشاريع",
-      bullets: [
-        "تطوير نظام ويب متكامل لإدارة عمليات المشفى باستخدام React وDjango.",
-        "تطوير تطبيق أندرويد مستقل لإدارة صيدلية المشفى باستخدام Flutter وSQLite (المخزون، المبيعات، فواتير المشتريات، الصناديق المالية، صلاحيات الفريق).",
-        "إجراء اختبارات وظيفية لمنطق عمليات البيع والشراء، واتساق أرصدة المخزون، ودقة حسابات الصناديق، وصلاحيات الوصول.",
-      ],
-      group: "software",
-    },
-    {
-      period: "كانون الثاني 2026 — حتى الآن",
-      role: "مطوّر ويب وموبايل",
-      badge: "دوام جزئي",
-      org: "Web Nova — عن بُعد",
-      bullets: [
-        "تطوير واجهة نظام لإدارة عيادة طبية (تسجيل المرضى، المواعيد، السجلات الطبية).",
-        "تطوير تطبيق أندرويد باستخدام Flutter لإدارة حجوزات ملعب وتنظيم المواعيد.",
-        "إجراء تحليل للأنظمة واختبارات وظيفية للتحقق من صحة العمليات.",
-        "إعداد توثيق وملخصات فنية لأعمال الفريق السابقة.",
-      ],
-      group: "software",
-    },
-    {
-      period: "2022 — حتى الآن",
-      role: "مطوّر برمجيات ومصمّم جرافيك",
-      badge: "تعاقد على مشاريع",
-      org: "kor kan — لبنان، عن بُعد",
-      bullets: [
-        "تطوير نظام مبيعات ومتجر One Dollars منذ 2024، يشمل الواجهات الأمامية والخلفية وإدارة المنتجات والطلبات وسلة الشراء.",
-        "تصميم قوالب المنتجات منذ 2022 باستخدام Adobe Illustrator وAdobe Photoshop، وتطبيق الهوية البصرية على المتجر.",
-      ],
-      group: "software",
-    },
-    {
-      period: "2022 — حتى الآن",
-      role: "مسؤول تقني",
-      badge: "مسؤوليات إضافية",
-      org: "عطاء للإغاثة",
-      bullets: [
-        "مسؤوليات تقنية إضافية ضمن العمل في عطاء للإغاثة.",
-        "تطوير تطبيق AtaaMEAL Field لرقمنة أعمال المراقبة والتقييم، وإدارة خطط الزيارات الميدانية وتوثيق الملاحظات ونتائج التقييم.",
-        "تقديم الدعم الفني للمستخدمين والأجهزة والبرمجيات، والعمل على صيانة الهاردوير والسوفت وير للابتوبات.",
-        "صيانة شبكات المكتب والحواسيب والطابعات ومعالجة المشكلات التقنية اليومية.",
-      ],
-      group: "software",
-    },
     {
       period: "أيلول 2023 — حتى الآن",
       role: "مسؤول المراقبة والتقييم",
       org: "عطاء للإغاثة",
       text: "إدارة ومتابعة مسارات المراقبة والتقييم، وأدوات جمع البيانات، وجودة البيانات، والتحليل، والتقارير، ودعم الفريق.",
-      group: "other",
     },
     {
       period: "حزيران — كانون الأول 2024",
       role: "مدير منطقة — الدانا",
-      badge: "دوام جزئي",
       org: "منظمة سوا",
       text: "إدارة عمليات المنطقة والفرق الميدانية، والإشراف على التدريبات، وتوزيع المنح، والتنسيق المحلي.",
-      group: "other",
     },
     {
       period: "أيار — أيلول 2023",
       role: "مساعد إدارة معلومات",
       org: "عطاء للإغاثة",
       text: "مراجعة بيانات البرامج، ودعم التقارير، وتجهيز بيانات المستفيدين، وإدارة الأرشفة الرقمية.",
-      group: "other",
     },
     {
       period: "كانون الثاني 2021 — أيار 2023",
       role: "مسؤول مراقبة وتقييم ميداني",
       org: "عطاء للإغاثة",
       text: "تنفيذ المراقبة الميدانية والتقييمات، وجمع البيانات الكمية والنوعية، والتحليل، والتحقق من جودة التنفيذ والبيانات.",
-      group: "other",
     },
     {
-      period: "تشرين الأول 2020 — كانون الثاني 2021",
-      role: "مدخل بيانات",
+      period: "2022 — حتى الآن",
+      role: "مسؤول تقنية معلومات — متطوع",
       org: "عطاء للإغاثة",
-      text: "إدخال وتحديث بيانات المستفيدين، ومراجعة المعلومات قبل مشاركتها مع المسؤولين المعنيين، وتنظيم وأرشفة وثائق المشاريع.",
-      group: "other",
+      text: "تقديم الدعم التقني، وصيانة شبكات المكتب، ومعالجة أعطال الأجهزة والبرمجيات، ودعم العمليات التقنية اليومية.",
     },
     {
-      period: "أيلول — تشرين الأول 2020",
-      role: "جامع بيانات",
-      org: "Relief International",
-      text: "المشاركة في تقييم احتياجات مخيمات النازحين داخلياً، وتنفيذ الزيارات الميدانية وجمع بيانات المستفيدين، ومراجعة استمارات جمع البيانات قبل تسليمها.",
-      group: "other",
-    },
-    {
-      period: "كانون الثاني 2021 — حتى الآن",
-      role: "مدرّب",
-      org: "Syrian Platform",
+      period: "2021 — حتى الآن",
+      role: "مدرب",
+      org: "المنصة السورية",
       text: "تقديم تدريبات في Excel وKoboToolbox وPower BI وحماية البيانات والأرشفة وأساسيات الأمن السيبراني.",
-      group: "other",
     },
   ],
 };
@@ -485,30 +328,6 @@ const projects: Record<Lang, ProjectItem[]> = {
       type: "Assessment design",
       text: "Questionnaires, sampling approaches, data-quality checks, analysis structures and concise evidence products.",
     },
-    {
-      icon: "05",
-      title: "Hospital Web System",
-      type: "React / Django",
-      text: "A web platform for Al-Salam Hospital in Maarat al-Numan, covering core hospital operations end to end.",
-    },
-    {
-      icon: "06",
-      title: "Pharmacy & Bookings Apps",
-      type: "Flutter / SQLite",
-      text: "A standalone Android app for hospital pharmacy management (inventory, sales, purchase invoices, cash boxes and role permissions), plus a Flutter app for stadium booking and scheduling.",
-    },
-    {
-      icon: "07",
-      title: "One Dollars Store",
-      type: "kor kan",
-      text: "An e-commerce store built for kor kan, covering the product catalog and purchase flow.",
-    },
-    {
-      icon: "08",
-      title: "Clinic Management System",
-      type: "Web Nova",
-      text: "A clinic management system covering patient records, appointments and day-to-day clinic operations.",
-    },
   ],
   ar: [
     {
@@ -535,61 +354,39 @@ const projects: Record<Lang, ProjectItem[]> = {
       type: "تصميم التقييمات",
       text: "تصميم الاستبيانات، ومنهجيات أخذ العينات، وفحوص جودة البيانات، وهياكل التحليل، وإنتاج مخرجات أدلة مختصرة وواضحة.",
     },
-    {
-      icon: "05",
-      title: "نظام ويب لمشفى",
-      type: "React / Django",
-      text: "تطوير منصة ويب لمشفى السلام في معرة النعمان تغطي العمليات الأساسية للمشفى.",
-    },
-    {
-      icon: "06",
-      title: "تطبيقات الصيدلية والحجوزات",
-      type: "Flutter / SQLite",
-      text: "تطبيق أندرويد مستقل لإدارة صيدلية المشفى (المخزون، المبيعات، فواتير المشتريات، الصناديق المالية وصلاحيات الفريق)، بالإضافة إلى تطبيق Flutter لإدارة حجوزات ملعب وتنظيم المواعيد.",
-    },
-    {
-      icon: "07",
-      title: "متجر One Dollars",
-      type: "kor kan",
-      text: "متجر إلكتروني تمت برمجته لشركة kor kan، يغطي كتالوج المنتجات ومسار الشراء.",
-    },
-    {
-      icon: "08",
-      title: "نظام إدارة عيادة",
-      type: "Web Nova",
-      text: "نظام لإدارة العيادات يغطي ملفات المرضى والمواعيد والعمليات اليومية للعيادة.",
-    },
   ],
 };
 
-type StackItem = { name: string; Icon: typeof BarChart3 };
-
-const stackItems: StackItem[] = [
-  { name: "Excel", Icon: FileSpreadsheet },
-  { name: "Power BI", Icon: BarChart3 },
-  { name: "KoboToolbox", Icon: ClipboardList },
-  { name: "XLSForm", Icon: FileText },
-  { name: "Google Forms", Icon: FormInput },
-  { name: "Microsoft Forms", Icon: ListChecks },
-  { name: "React", Icon: Atom },
-  { name: "Django", Icon: Server },
-  { name: "Flutter", Icon: Smartphone },
-  { name: "SQL", Icon: Table2 },
-  { name: "SQLite", Icon: Database },
-  { name: "Python", Icon: Terminal },
-  { name: "C#", Icon: Hash },
-  { name: "Git", Icon: GitBranch },
-  { name: "GitHub", Icon: Github },
-  { name: "Firebase", Icon: Flame },
-  { name: "Postman", Icon: Send },
-  { name: "Selenium", Icon: TestTube },
-  { name: "Unit Testing", Icon: CheckCircle2 },
-  { name: "Illustrator", Icon: PenTool },
-  { name: "Photoshop", Icon: ImageIcon },
-  { name: "ChatGPT", Icon: Bot },
-  { name: "Claude", Icon: Sparkles },
-  { name: "NotebookLM", Icon: BookOpen },
-];
+const stack: Record<Lang, string[]> = {
+  en: [
+    "Excel",
+    "Power BI",
+    "KoboToolbox",
+    "XLSForm",
+    "Google Forms",
+    "Microsoft Forms",
+    "AI Tools",
+    "Databases",
+    "Cloud Storage",
+    "Networking",
+    "Programming",
+    "Data Quality",
+  ],
+  ar: [
+    "Excel",
+    "Power BI",
+    "KoboToolbox",
+    "XLSForm",
+    "Google Forms",
+    "Microsoft Forms",
+    "أدوات الذكاء الاصطناعي",
+    "قواعد البيانات",
+    "التخزين السحابي",
+    "الشبكات",
+    "البرمجة",
+    "جودة البيانات",
+  ],
+};
 
 const education = {
   en: [
@@ -597,18 +394,18 @@ const education = {
       Icon: GraduationCap,
       title: "Bachelor of Information Engineering",
       text: "International University of Science and Renaissance",
-      period: "2026",
+      period: "2025 — 2026",
     },
     {
       Icon: ShieldCheck,
       title: "Information Security & Networks Institute",
       text: "International University of Science and Renaissance",
-      period: "2019",
+      period: "2019 — 2020",
     },
     {
       Icon: Sparkles,
-      title: "Professional Training & Courses",
-      text: "M&E skills (ATAA), XLS form design (Point Organization), Power BI & AI (Coursera), Google Forms for user research (Coursera), Microsoft Excel & Office (Research Center), English (Coursera), PSEA, Child Protection & GBV",
+      title: "Professional Training",
+      text: "M&E, Kobo/XLS, Excel, Power BI, AI, data protection, PSEA, Child Protection & GBV",
       period: "",
     },
   ],
@@ -617,33 +414,22 @@ const education = {
       Icon: GraduationCap,
       title: "بكالوريوس الهندسة المعلوماتية",
       text: "الجامعة الدولية للعلوم والنهضة",
-      period: "2026",
+      period: "2025 — 2026",
     },
     {
       Icon: ShieldCheck,
       title: "معهد أمن المعلومات والشبكات",
       text: "الجامعة الدولية للعلوم والنهضة",
-      period: "2019",
+      period: "2019 — 2020",
     },
     {
       Icon: Sparkles,
-      title: "التدريب والدورات المهنية",
-      text: "مهارات المراقبة والتقييم (عطاء)، تصميم نماذج XLS (منظمة بوينت)، Power BI والذكاء الاصطناعي (كورسيرا)، استخدام Google Forms لتحليل أبحاث المستخدم (كورسيرا)، مايكروسوفت إكسل وأوفيس (مركز الأبحاث)، اللغة الإنجليزية (كورسيرا)، الحماية من الاستغلال والانتهاك الجنسي (PSEA)، حماية الطفل والعنف القائم على النوع الاجتماعي (GBV)",
+      title: "التدريب المهني",
+      text: "المراقبة والتقييم، Kobo/XLS، Excel، Power BI، الذكاء الاصطناعي، حماية البيانات، PSEA، حماية الطفل وGBV",
       period: "",
     },
   ],
 } as const;
-
-const languages: Record<Lang, { label: string; level: string }[]> = {
-  en: [
-    { label: "Arabic", level: "Native" },
-    { label: "English", level: "Good working proficiency" },
-  ],
-  ar: [
-    { label: "العربية", level: "اللغة الأم" },
-    { label: "الإنجليزية", level: "مستوى عملي جيد" },
-  ],
-};
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
@@ -818,77 +604,26 @@ export default function Home() {
       <section id="experience" className="section-pad content-section">
         <div className="section-kicker">03 / {t.experience}</div>
         <h2>{t.experience}</h2>
-
-        <h3 className="timeline-group-title">{t.softwareExperience}</h3>
         <div className="timeline">
-          {experienceItems[lang]
-            .filter((item) => item.group === "software")
-            .map((item) => (
-              <motion.article
-                className="timeline-item"
-                key={`${item.role}-${item.org}`}
-                initial={{ opacity: 0, x: rtl ? 20 : -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-              >
-                <div className="timeline-period">{item.period}</div>
-                <div className="timeline-dot">
-                  <span />
-                </div>
-                <div className="timeline-body">
-                  <h3>
-                    {item.role}
-                    {item.badge && <span className="role-badge">{item.badge}</span>}
-                  </h3>
-                  <h4>{item.org}</h4>
-                  {item.bullets ? (
-                    <ul className="timeline-bullets">
-                      {item.bullets.map((b) => (
-                        <li key={b}>{b}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>{item.text}</p>
-                  )}
-                </div>
-              </motion.article>
-            ))}
-        </div>
-
-        <h3 className="timeline-group-title">{t.otherExperience}</h3>
-        <div className="timeline">
-          {experienceItems[lang]
-            .filter((item) => item.group === "other")
-            .map((item) => (
-              <motion.article
-                className="timeline-item"
-                key={`${item.role}-${item.org}`}
-                initial={{ opacity: 0, x: rtl ? 20 : -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-              >
-                <div className="timeline-period">{item.period}</div>
-                <div className="timeline-dot">
-                  <span />
-                </div>
-                <div className="timeline-body">
-                  <h3>
-                    {item.role}
-                    {item.badge && <span className="role-badge">{item.badge}</span>}
-                  </h3>
-                  <h4>{item.org}</h4>
-                  {item.bullets ? (
-                    <ul className="timeline-bullets">
-                      {item.bullets.map((b) => (
-                        <li key={b}>{b}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>{item.text}</p>
-                  )}
-                </div>
-              </motion.article>
-            ))}
+          {experienceItems[lang].map((item) => (
+            <motion.article
+              className="timeline-item"
+              key={`${item.role}-${item.org}`}
+              initial={{ opacity: 0, x: rtl ? 20 : -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <div className="timeline-period">{item.period}</div>
+              <div className="timeline-dot">
+                <span />
+              </div>
+              <div className="timeline-body">
+                <h3>{item.role}</h3>
+                <h4>{item.org}</h4>
+                <p>{item.text}</p>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </section>
 
@@ -902,6 +637,9 @@ export default function Home() {
               <div className="project-type">{p.type}</div>
               <h3>{p.title}</h3>
               <p>{p.text}</p>
+              <span className="project-link">
+                {t.caseStudy} <ArrowUpRight size={16} />
+              </span>
             </article>
           ))}
         </div>
@@ -910,12 +648,11 @@ export default function Home() {
       <section className="section-pad content-section">
         <div className="section-kicker">05 / {t.tech}</div>
         <h2>{t.tech}</h2>
-        <div className="stack-grid">
-          {stackItems.map(({ name, Icon }, i) => (
-            <div className="stack-card" key={name} style={{ animationDelay: `${i * 60}ms` }}>
-              <Icon size={22} />
-              <span>{name}</span>
-            </div>
+        <div className="stack-cloud">
+          {stack[lang].map((item, i) => (
+            <span key={item} style={{ animationDelay: `${i * 80}ms` }}>
+              {item}
+            </span>
           ))}
         </div>
       </section>
@@ -937,23 +674,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-pad content-section">
-        <div className="section-kicker">07 / {t.languages}</div>
-        <h2>{t.languages}</h2>
-        <div className="stack-cloud">
-          {languages[lang].map(({ label, level }) => (
-            <span key={label}>
-              {label} — {level}
-            </span>
-          ))}
-        </div>
-      </section>
-
       <section id="contact" className="section-pad contact-section">
         <DataNetwork />
         <div className="contact-card">
           <div>
-            <div className="section-kicker">08 / {t.contactSection}</div>
+            <div className="section-kicker">07 / {t.contactSection}</div>
             <h2>{t.contactTitle}</h2>
             <p>{t.contactText}</p>
           </div>
@@ -965,14 +690,6 @@ export default function Home() {
             <a href="tel:+963965337477">
               <Phone />
               {t.phone}
-            </a>
-            <a
-              href="https://wa.me/352681597067"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <MessageCircle />
-              {t.whatsapp}
             </a>
             <a
               href="https://www.linkedin.com/in/wajeehalsultan"

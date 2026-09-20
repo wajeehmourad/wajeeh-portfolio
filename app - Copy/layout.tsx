@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Wajeeh Murad AlSultan | Portfolio",
 
   description:
-    "Personal portfolio of Wajeeh Murad AlSultan, Informatics Engineer specializing in data analysis, information management, MEAL, IT, software development (React, Django, Flutter) and digital solutions.",
+    "Personal portfolio of Wajeeh Murad AlSultan, Informatics Engineer specializing in data analysis, information management, MEAL, IT, artificial intelligence and digital solutions.",
 
   keywords: [
     "Wajeeh Murad AlSultan",
@@ -19,12 +19,6 @@ export const metadata: Metadata = {
     "Artificial Intelligence",
     "IT",
     "Programming",
-    "React",
-    "Django",
-    "Flutter",
-    "Web Development",
-    "Android Development",
-    "Graphic Design",
   ],
 
   authors: [
